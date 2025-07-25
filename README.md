@@ -12,3 +12,5 @@ Powered by SQlite3 Database and Tkinter.
 2. Extract the zip file
 3. Go to the extracted directory
 4. Open Powershell/terminal and type `python notes.py`
+
+- This is a project for Python Class (26-07-2025) [NVIT]
