@@ -13,4 +13,4 @@ Powered by SQlite3 Database and Tkinter.
 3. Go to the extracted directory
 4. Open Powershell/terminal and type `python notes.py`
 
-- This is a project for Python Class (26-07-2025) [NVIT]
+- This is a project for Python Class (26-07-2025)
