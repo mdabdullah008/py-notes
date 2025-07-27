@@ -1,11 +1,45 @@
+# imports the required packages for this code
 from datetime import datetime
 import sqlite3
 from tkinter import *
 
 root = Tk()
-root.geometry('320x600')
-root.title('Notes')
+root.geometry('320x600') # determining the resolution of the window
+root.title('Notes') # title of the window
 
+# ----------------------------------------------------------------------------------------------
+
+# every 'lblspaceXX' here indicates a blank space.
+lblspace01 = Label(root) 
+lblspace01.grid(row=0, column=0)
+
+lbltitle = Label(root, text='Title:')
+lbltitle.grid(row=11, column=0)
+txttitle = Entry(root, width = 30)
+txttitle.grid(row=11, column=1)
+
+lblspace03 = Label(root)
+lblspace03.grid(row=12, column=0)
+
+lblnote = Label(root, text='Note:')
+lblnote.grid(row=13, column=0)
+txtnote = Text(root, height=10, width=30)
+txtnote.grid(row=13, column=1)
+
+lblspace04 = Label(root)
+lblspace04.grid(row=14, column=0)
+
+lblno = Label(root, text='No:')
+lblno.grid(row=15, column=0)
+txtno = Entry(root, width = 30)
+txtno.grid(row=15, column=1)
+
+lblspace05 = Label(root)
+lblspace05.grid(row=16, column=0)
+
+# ----------------------------------------------------------------------------------------------
+
+# button and function for saving note.
 def notesave():
     con = sqlite3.connect('notes.db')
     cursor = con.cursor()
@@ -22,7 +56,36 @@ def notesave():
     txttitle.delete(0, END)
     txtnote.delete(1.0, END)
 
-def noteedit():
+btnSave = Button(root, text='Save', command=notesave)
+btnSave.grid(row=17, column=0)
+
+# ----------------------------------------------------------------------------------------------
+# button and popup function for editing note.
+
+# ----------------------------------------------------------------------------------------------
+# function for the update and cancel buttons in the edit popup window.
+def noteupdate(): # function for the update button
+    con = sqlite3.connect('notes.db')
+    cursor = con.cursor()
+    cursor.execute("""UPDATE Notes SET
+                    Title = :title,
+                    Content = :content
+                    WHERE No= :no""",
+                    {
+                        'title' : txttitle_edit.get(),
+                        'content' : txtnote_edit.get(1.0, END),
+                        'no' : txtno.get()
+                    }
+                    )
+    con.commit()
+    print('Note Updated Successfully!')
+    con.close()
+
+def destroy(): # function for cancel button
+    editor.destroy()
+# ----------------------------------------------------------------------------------------------
+
+def noteedit(): # creating a popup window for editing and viewing.
     global editor
     global txttitle_edit
     global txtnote_edit
@@ -63,26 +126,11 @@ def noteedit():
     btnclose = Button(editor, text='Cancel', command=destroy)
     btnclose.grid(row=16, column=1)
 
-def noteupdate():
-    con = sqlite3.connect('notes.db')
-    cursor = con.cursor()
-    cursor.execute("""UPDATE Notes SET
-                    Title = :title,
-                    Content = :content
-                    WHERE No= :no""",
-                    {
-                        'title' : txttitle_edit.get(),
-                        'content' : txtnote_edit.get(1.0, END),
-                        'no' : txtno.get()
-                    }
-                    )
-    con.commit()
-    print('Note Updated Successfully!')
-    con.close()
+btnEdit = Button(root, text='Edit/View', command=noteedit)
+btnEdit.grid(row=17, column=1)
+# ----------------------------------------------------------------------------------------------
 
-def destroy():
-    editor.destroy()
-
+# button and function for showing the entries of saved notes.
 def noteshow():
     con = sqlite3.connect('notes.db')
     cursor = con.cursor()
@@ -95,6 +143,12 @@ def noteshow():
     lblrecordShow = Label(text=print_record)
     lblrecordShow.grid(row = 130, column=0, columnspan=2)
 
+btnShow = Button(root, text='Show', command=noteshow)
+btnShow.grid(row=18, column=0)
+
+# ----------------------------------------------------------------------------------------------
+
+# button and function for deleting note.
 def notedelete():
     con = sqlite3.connect('notes.db')
     cursor = con.cursor()
@@ -105,48 +159,15 @@ def notedelete():
     con.close()
     noteshow()
 
-lblspace01 = Label(root)
-lblspace01.grid(row=0, column=0)
-
-lbltitle = Label(root, text='Title:')
-lbltitle.grid(row=11, column=0)
-txttitle = Entry(root, width = 30)
-txttitle.grid(row=11, column=1)
-
-lblspace03 = Label(root)
-lblspace03.grid(row=12, column=0)
-
-lblnote = Label(root, text='Note:')
-lblnote.grid(row=13, column=0)
-txtnote = Text(root, height=10, width=30)
-txtnote.grid(row=13, column=1)
-
-lblspace04 = Label(root)
-lblspace04.grid(row=14, column=0)
-
-lblno = Label(root, text='No:')
-lblno.grid(row=15, column=0)
-txtno = Entry(root, width = 30)
-txtno.grid(row=15, column=1)
-
-lblspace05 = Label(root)
-lblspace05.grid(row=16, column=0)
-
-btnSave = Button(root, text='Save', command=notesave)
-btnSave.grid(row=17, column=0)
-
-btnEdit = Button(root, text='Edit/View', command=noteedit)
-btnEdit.grid(row=17, column=1)
-
-btnShow = Button(root, text='Show', command=noteshow)
-btnShow.grid(row=18, column=0)
-
 btnDelete = Button(root, text='Delete', command = notedelete)
 btnDelete.grid(row=18, column=1)
+
+# ----------------------------------------------------------------------------------------------
 
 lblspace04 = Label(root)
 lblspace04.grid(row=19, column=0)
 
+# label for showing the information in the table.
 lblrecordtable= Label(text='No.                    Title                    Date')
 lblrecordtable.grid(row=20, column=0, columnspan=2)
 
