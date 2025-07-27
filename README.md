@@ -1,9 +1,9 @@
-# tk-notes
+# py-notes
 
 <img width="709" height="648" alt="image" src="https://github.com/user-attachments/assets/024121db-ee52-4fe2-bb02-abe6b497f6a6" />
 
 
-Notes app made with Python.
+A Simple Notes app made with Python.
 
 Powered by SQlite3 Database and Tkinter.
 
