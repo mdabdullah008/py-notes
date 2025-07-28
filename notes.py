@@ -6,7 +6,7 @@ from tkinter import *
 root = Tk()
 root.geometry('320x600') # determining the resolution of the window
 root.title('Notes') # title of the window
-
+root.configure(bg='lightgray') # background color for better view
 # ----------------------------------------------------------------------------------------------
 
 # every 'lblspaceXX' here indicates a blank space.
@@ -38,7 +38,10 @@ lblspace05 = Label(root)
 lblspace05.grid(row=16, column=0)
 
 # ----------------------------------------------------------------------------------------------
-
+# This helps group related buttons together visually and structurally
+button_frame = Frame(root)
+button_frame.grid(row=18, column=0, columnspan=2, pady=10)
+# ----------------------------------------------------------------------------------------------
 # button and function for saving note.
 def notesave():
     con = sqlite3.connect('notes.db')
@@ -56,8 +59,8 @@ def notesave():
     txttitle.delete(0, END)
     txtnote.delete(1.0, END)
 
-btnSave = Button(root, text='Save', command=notesave)
-btnSave.grid(row=17, column=0)
+btnSave = Button(button_frame, text='Save', command=notesave)
+btnSave.grid(row=17, column=0, padx=5)
 
 # ----------------------------------------------------------------------------------------------
 # button and popup function for editing note.
@@ -126,8 +129,8 @@ def noteedit(): # creating a popup window for editing and viewing.
     btnclose = Button(editor, text='Cancel', command=destroy)
     btnclose.grid(row=16, column=1)
 
-btnEdit = Button(root, text='Edit/View', command=noteedit)
-btnEdit.grid(row=17, column=1)
+btnEdit = Button(button_frame, text='Edit/View', command=noteedit)
+btnEdit.grid(row=17, column=1, padx=5)
 # ----------------------------------------------------------------------------------------------
 
 # button and function for showing the entries of saved notes.
@@ -143,8 +146,8 @@ def noteshow():
     lblrecordShow = Label(text=print_record)
     lblrecordShow.grid(row = 130, column=0, columnspan=2)
 
-btnShow = Button(root, text='Show', command=noteshow)
-btnShow.grid(row=18, column=0)
+btnShow = Button(button_frame, text='Show', command=noteshow)
+btnShow.grid(row=17, column=2, padx=5)
 
 # ----------------------------------------------------------------------------------------------
 
@@ -159,16 +162,13 @@ def notedelete():
     con.close()
     noteshow()
 
-btnDelete = Button(root, text='Delete', command = notedelete)
-btnDelete.grid(row=18, column=1)
+btnDelete = Button(button_frame, text='Delete', command = notedelete)
+btnDelete.grid(row=17, column=3, padx=5)
 
 # ----------------------------------------------------------------------------------------------
 
-lblspace04 = Label(root)
-lblspace04.grid(row=19, column=0)
-
 # label for showing the information in the table.
 lblrecordtable= Label(text='No.                    Title                    Date')
-lblrecordtable.grid(row=20, column=0, columnspan=2)
+lblrecordtable.grid(row=19, column=0, columnspan=2)
 
 root.mainloop()
