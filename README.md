@@ -1,6 +1,6 @@
 # py-notes
 
-<img width="683" height="581" alt="screenshot of the notes app" src="https://raw.githubusercontent.com/mdabdullah008/py-notes/refs/heads/main/screenshots/screenshot.png" />
+<img width="677" height="583" alt="screenshot of the notes app" src="https://github.com/mdabdullah008/py-notes/blob/main/screenshot.png?raw=true" />
 
 A Simple Notes app made with Python.
 
