@@ -1,10 +1,10 @@
 # py-notes
+
+<img width="683" height="581" alt="screenshot of the notes app" src="https://github.com/mdabdullah008/py-notes/screenshots/screenshot.png" />
+
 A Simple Notes app made with Python.
 
 Powered by SQlite3 Database and Tkinter.
-
-
-<img width="674" height="584" alt="image" src="https://github.com/user-attachments/assets/c11f4ab6-cfe1-4694-878e-2ab03b25df8a" />
 
 ## How to download and run
 1. Click on the code button and download it as .zip file

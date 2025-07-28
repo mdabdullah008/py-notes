@@ -10,36 +10,36 @@ root.configure(bg='lightgray') # background color for better view
 # ----------------------------------------------------------------------------------------------
 
 # every 'lblspaceXX' here indicates a blank space.
-lblspace01 = Label(root) 
+lblspace01 = Label(root, bg='lightgray') 
 lblspace01.grid(row=0, column=0)
 
-lbltitle = Label(root, text='Title:')
+lbltitle = Label(root, text='Title:', bg='lightgray')
 lbltitle.grid(row=11, column=0)
 txttitle = Entry(root, width = 30)
 txttitle.grid(row=11, column=1)
 
-lblspace03 = Label(root)
+lblspace03 = Label(root, bg='lightgray')
 lblspace03.grid(row=12, column=0)
 
-lblnote = Label(root, text='Note:')
+lblnote = Label(root, text='Note:', bg='lightgray')
 lblnote.grid(row=13, column=0)
 txtnote = Text(root, height=10, width=30)
 txtnote.grid(row=13, column=1)
 
-lblspace04 = Label(root)
+lblspace04 = Label(root, bg='lightgray')
 lblspace04.grid(row=14, column=0)
 
-lblno = Label(root, text='No:')
+lblno = Label(root, text='No:', bg='lightgray')
 lblno.grid(row=15, column=0)
 txtno = Entry(root, width = 30)
 txtno.grid(row=15, column=1)
 
-lblspace05 = Label(root)
+lblspace05 = Label(root, bg='lightgray')
 lblspace05.grid(row=16, column=0)
 
 # ----------------------------------------------------------------------------------------------
 # This helps group related buttons together visually and structurally
-button_frame = Frame(root)
+button_frame = Frame(root, bg='lightgray')
 button_frame.grid(row=18, column=0, columnspan=2, pady=10)
 # ----------------------------------------------------------------------------------------------
 # button and function for saving note.
@@ -95,24 +95,25 @@ def noteedit(): # creating a popup window for editing and viewing.
     editor = Tk()
     editor.geometry('320x400')
     editor.title('Edit Note')
+    editor.configure(bg='lightgray')
 
-    lblspace_edit01 = Label(editor)
+    lblspace_edit01 = Label(editor, bg='lightgray')
     lblspace_edit01.grid(row=0, column=0)
 
-    lbltitle_edit = Label(editor, text='Title:')
+    lbltitle_edit = Label(editor, text='Title:', bg='lightgray')
     lbltitle_edit.grid(row=11, column=0)
     txttitle_edit = Entry(editor, width = 30)
     txttitle_edit.grid(row=11, column=1)
 
-    lblspace03_edit = Label(editor)
+    lblspace03_edit = Label(editor,bg='lightgray')
     lblspace03_edit.grid(row=12, column=0)
 
-    lblnote_edit = Label(editor, text='Note:')
+    lblnote_edit = Label(editor, text='Note:', bg='lightgray')
     lblnote_edit.grid(row=13, column=0)
     txtnote_edit = Text(editor, height=10, width=30)
     txtnote_edit.grid(row=13, column=1)
 
-    lblspace04_edit = Label(editor)
+    lblspace04_edit = Label(editor, bg='lightgray')
     lblspace04_edit.grid(row=14, column=0)
 
     con = sqlite3.connect('notes.db')
@@ -122,6 +123,8 @@ def noteedit(): # creating a popup window for editing and viewing.
     for data in record:
         txttitle_edit.insert(0, data[1])
         txtnote_edit.insert(1.0, data[2])
+
+    
 
     btnupdate = Button(editor, text='Update', command=noteupdate)
     btnupdate.grid(row=15, column=1)
@@ -168,7 +171,7 @@ btnDelete.grid(row=17, column=3, padx=5)
 # ----------------------------------------------------------------------------------------------
 
 # label for showing the information in the table.
-lblrecordtable= Label(text='No.                    Title                    Date')
+lblrecordtable= Label(text='No.                    Title                    Date', bg='lightgray')
 lblrecordtable.grid(row=19, column=0, columnspan=2)
 
 root.mainloop()
